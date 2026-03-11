@@ -1,63 +1,52 @@
 ```java
-import java.util.HashMap;
 import java.util.Map;
 
-public class RoomInventory {
+public class RoomSearchService {
 
     /**
-     * Stores available room count for each room type.
-     * Key   -> Room type name
-     * Value -> Available room count
+     * Displays available rooms along with
+     * their details and pricing.
+     *
+     * This method performs read-only access
+     * to inventory and room data.
+     *
+     * @param inventory centralized room inventory
+     * @param singleRoom single room definition
+     * @param doubleRoom double room definition
+     * @param suiteRoom suite room definition
      */
-    private Map<String, Integer> roomAvailability;
+    public void searchAvailableRooms(
+            RoomInventory inventory,
+            Room singleRoom,
+            Room doubleRoom,
+            Room suiteRoom) {
 
-    /**
-     * Constructor initializes the inventory
-     * with default availability values.
-     */
-    public RoomInventory() {
-        roomAvailability = new HashMap<>();
-        initializeInventory();
-    }
+        Map<String, Integer> availability = inventory.getRoomAvailability();
 
-    /**
-     * Initializes room availability data.
-     * This method centralizes inventory setup
-     * instead of using scattered variables.
-     */
-    private void initializeInventory() {
-        roomAvailability.put("SingleRoom", 5);
-        roomAvailability.put("DoubleRoom", 3);
-        roomAvailability.put("SuiteRoom", 2);
-    }
+        System.out.println("\n===== Available Rooms =====");
 
-    /**
-     * Returns available rooms for a given room type.
-     */
-    public int getAvailability(String roomType) {
-        return roomAvailability.getOrDefault(roomType, 0);
-    }
-
-    /**
-     * Updates room availability for a given type.
-     */
-    public void updateAvailability(String roomType, int newCount) {
-        if (roomAvailability.containsKey(roomType)) {
-            roomAvailability.put(roomType, newCount);
-        } else {
-            System.out.println("Room type not found in inventory.");
+        // Check and display Single Room availability
+        if (availability.get("SingleRoom") > 0) {
+            System.out.println("\nSingle Room Available:");
+            singleRoom.displayRoomDetails();
+            System.out.println("Available: " + availability.get("SingleRoom"));
         }
-    }
 
-    /**
-     * Displays the entire inventory.
-     */
-    public void displayInventory() {
-        System.out.println("===== Current Room Inventory =====");
-
-        for (Map.Entry<String, Integer> entry : roomAvailability.entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue() + " rooms available");
+        // Check and display Double Room availability
+        if (availability.get("DoubleRoom") > 0) {
+            System.out.println("\nDouble Room Available:");
+            doubleRoom.displayRoomDetails();
+            System.out.println("Available: " + availability.get("DoubleRoom"));
         }
+
+        // Check and display Suite Room availability
+        if (availability.get("SuiteRoom") > 0) {
+            System.out.println("\nSuite Room Available:");
+            suiteRoom.displayRoomDetails();
+            System.out.println("Available: " + availability.get("SuiteRoom"));
+        }
+
+        System.out.println("\n===========================");
     }
 }
 ```
