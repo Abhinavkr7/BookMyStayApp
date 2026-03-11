@@ -1,19 +1,9 @@
 ```java
-import java.util.Map;
-
 public class RoomSearchService {
 
     /**
-     * Displays available rooms along with
-     * their details and pricing.
-     *
-     * This method performs read-only access
-     * to inventory and room data.
-     *
-     * @param inventory centralized room inventory
-     * @param singleRoom single room definition
-     * @param doubleRoom double room definition
-     * @param suiteRoom suite room definition
+     * Displays available rooms with details and pricing.
+     * This method only reads data and does NOT modify inventory.
      */
     public void searchAvailableRooms(
             RoomInventory inventory,
@@ -21,32 +11,33 @@ public class RoomSearchService {
             Room doubleRoom,
             Room suiteRoom) {
 
-        Map<String, Integer> availability = inventory.getRoomAvailability();
-
         System.out.println("\n===== Available Rooms =====");
 
-        // Check and display Single Room availability
-        if (availability.get("SingleRoom") > 0) {
-            System.out.println("\nSingle Room Available:");
+        // Check Single Room availability
+        int singleAvailable = inventory.getAvailability("SingleRoom");
+        if (singleAvailable > 0) {
+            System.out.println("\nSingle Room:");
             singleRoom.displayRoomDetails();
-            System.out.println("Available: " + availability.get("SingleRoom"));
+            System.out.println("Available Rooms: " + singleAvailable);
         }
 
-        // Check and display Double Room availability
-        if (availability.get("DoubleRoom") > 0) {
-            System.out.println("\nDouble Room Available:");
+        // Check Double Room availability
+        int doubleAvailable = inventory.getAvailability("DoubleRoom");
+        if (doubleAvailable > 0) {
+            System.out.println("\nDouble Room:");
             doubleRoom.displayRoomDetails();
-            System.out.println("Available: " + availability.get("DoubleRoom"));
+            System.out.println("Available Rooms: " + doubleAvailable);
         }
 
-        // Check and display Suite Room availability
-        if (availability.get("SuiteRoom") > 0) {
-            System.out.println("\nSuite Room Available:");
+        // Check Suite Room availability
+        int suiteAvailable = inventory.getAvailability("SuiteRoom");
+        if (suiteAvailable > 0) {
+            System.out.println("\nSuite Room:");
             suiteRoom.displayRoomDetails();
-            System.out.println("Available: " + availability.get("SuiteRoom"));
+            System.out.println("Available Rooms: " + suiteAvailable);
         }
 
-        System.out.println("\n===========================");
+        System.out.println("\n============================");
     }
 }
 ```
