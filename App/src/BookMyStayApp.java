@@ -1,46 +1,88 @@
-/**
- * ======================================================
- * MAIN CLASS - UseCase1HotelBookingApp
- * ======================================================
- *
- * Use Case 1: Application Entry & Welcome Message
- *
- * Description:
- * This class represents the entry point of the
- * Hotel Booking Management System.
- *
- * At this stage, the application:
- * - Starts execution from the main() method
- * - Displays a welcome message to the user
- * - Confirms that the system has started successfully
- *
- * No business logic, data structures, or user input
- * is implemented in this use case.
- *
- * The goal is to establish a clear and predictable
- * application startup point.
- *
- * @author Developer
- * @version 1.0
- */
+```java
+// Abstract class representing a generic hotel room
+abstract class Room {
 
-public class UseCase1HotelBookingApp {
+    /** Number of beds available in the room */
+    protected int numberOfBeds;
 
-    /**
-     * Application entry point.
-     *
-     * This method is the first method executed
-     * when the program is launched by the JVM.
-     *
-     * @param args Command-line arguments
-     */
-    public static void main(String[] args) {
+    /** Total size of the room in square feet */
+    protected int squareFeet;
 
-        System.out.println("=================================");
-        System.out.println(" Welcome to Book My Stay App ");
-        System.out.println(" Hotel Booking System v1.0 ");
-        System.out.println(" System started successfully.");
-        System.out.println("=================================");
+    /** Price charged per night for this room type */
+    protected double pricePerNight;
 
+    // Constructor used by child classes
+    public Room(int numberOfBeds, int squareFeet, double pricePerNight) {
+        this.numberOfBeds = numberOfBeds;
+        this.squareFeet = squareFeet;
+        this.pricePerNight = pricePerNight;
+    }
+
+    // Method to display room details
+    public void displayRoomDetails() {
+        System.out.println("Beds: " + numberOfBeds);
+        System.out.println("Room Size: " + squareFeet + " sq ft");
+        System.out.println("Price per Night: $" + pricePerNight);
     }
 }
+
+// Single Room class
+class SingleRoom extends Room {
+
+    public SingleRoom() {
+        super(1, 200, 1000);
+    }
+}
+
+// Double Room class
+class DoubleRoom extends Room {
+
+    public DoubleRoom() {
+        super(2, 350, 1800);
+    }
+}
+
+// Suite Room class
+class SuiteRoom extends Room {
+
+    public SuiteRoom() {
+        super(3, 600, 3500);
+    }
+}
+
+// Main Application
+public class BookMyStayApp {
+
+    public static void main(String[] args) {
+
+        // Create room objects
+        Room singleRoom = new SingleRoom();
+        Room doubleRoom = new DoubleRoom();
+        Room suiteRoom = new SuiteRoom();
+
+        // Static availability variables
+        int singleAvailability = 5;
+        int doubleAvailability = 3;
+        int suiteAvailability = 2;
+
+        System.out.println("===== Hotel Room Availability =====\n");
+
+        System.out.println("Single Room:");
+        singleRoom.displayRoomDetails();
+        System.out.println("Available Rooms: " + singleAvailability);
+        System.out.println();
+
+        System.out.println("Double Room:");
+        doubleRoom.displayRoomDetails();
+        System.out.println("Available Rooms: " + doubleAvailability);
+        System.out.println();
+
+        System.out.println("Suite Room:");
+        suiteRoom.displayRoomDetails();
+        System.out.println("Available Rooms: " + suiteAvailability);
+        System.out.println();
+
+        System.out.println("Application Terminated.");
+    }
+}
+```
