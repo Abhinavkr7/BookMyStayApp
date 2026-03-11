@@ -1,85 +1,43 @@
 ```java
-import java.util.HashMap;
-import java.util.Map;
-
-public class RoomInventory {
-
-    // Constants for room types
-    public static final String SINGLE = "SingleRoom";
-    public static final String DOUBLE = "DoubleRoom";
-    public static final String SUITE  = "SuiteRoom";
+public class RoomSearchService {
 
     /**
-     * Stores available room count for each room type
-     * Key   -> Room type
-     * Value -> Available count
+     * Displays available rooms with details and pricing.
+     * This method only reads data and does NOT modify inventory.
      */
-    private Map<String, Integer> roomAvailability;
+    public void searchAvailableRooms(
+            RoomInventory inventory,
+            Room singleRoom,
+            Room doubleRoom,
+            Room suiteRoom) {
 
-    /**
-     * Constructor initializes inventory
-     */
-    public RoomInventory() {
-        roomAvailability = new HashMap<>();
-        initializeInventory();
-    }
+        System.out.println("\n===== Available Rooms =====");
 
-    /**
-     * Initializes default room availability
-     */
-    private void initializeInventory() {
-        roomAvailability.put(SINGLE, 5);
-        roomAvailability.put(DOUBLE, 3);
-        roomAvailability.put(SUITE, 2);
-    }
-
-    /**
-     * Returns available room count
-     */
-    public int getAvailability(String roomType) {
-        return roomAvailability.getOrDefault(roomType, 0);
-    }
-
-    /**
-     * Book a room if available
-     */
-    public boolean bookRoom(String roomType) {
-
-        int available = getAvailability(roomType);
-
-        if (available > 0) {
-            roomAvailability.put(roomType, available - 1);
-            System.out.println("Room booked successfully.");
-            return true;
-        } else {
-            System.out.println("No rooms available for " + roomType);
-            return false;
-        }
-    }
-
-    /**
-     * Cancel booking and return room to inventory
-     */
-    public void cancelBooking(String roomType) {
-
-        int available = getAvailability(roomType);
-        roomAvailability.put(roomType, available + 1);
-
-        System.out.println("Booking cancelled. Room returned to inventory.");
-    }
-
-    /**
-     * Display complete inventory
-     */
-    public void displayInventory() {
-
-        System.out.println("\n===== Current Room Inventory =====");
-
-        for (Map.Entry<String, Integer> entry : roomAvailability.entrySet()) {
-            System.out.println(entry.getKey() + " -> " + entry.getValue() + " rooms available");
+        // Check Single Room availability
+        int singleAvailable = inventory.getAvailability("SingleRoom");
+        if (singleAvailable > 0) {
+            System.out.println("\nSingle Room:");
+            singleRoom.displayRoomDetails();
+            System.out.println("Available Rooms: " + singleAvailable);
         }
 
-        System.out.println("==================================");
+        // Check Double Room availability
+        int doubleAvailable = inventory.getAvailability("DoubleRoom");
+        if (doubleAvailable > 0) {
+            System.out.println("\nDouble Room:");
+            doubleRoom.displayRoomDetails();
+            System.out.println("Available Rooms: " + doubleAvailable);
+        }
+
+        // Check Suite Room availability
+        int suiteAvailable = inventory.getAvailability("SuiteRoom");
+        if (suiteAvailable > 0) {
+            System.out.println("\nSuite Room:");
+            suiteRoom.displayRoomDetails();
+            System.out.println("Available Rooms: " + suiteAvailable);
+        }
+
+        System.out.println("\n============================");
     }
 }
 ```
