@@ -30,8 +30,7 @@ public class Reservation {
         System.out.println("Guest: " + guestName + " | Room Type: " + roomType);
     }
 }
-```
-```java
+
 public class RoomSearchService {
 
     /**
