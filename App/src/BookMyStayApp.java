@@ -1,4 +1,4 @@
-```java
+
 public class Reservation {
 
     /** Name of the guest making the booking */
@@ -30,8 +30,7 @@ public class Reservation {
         System.out.println("Guest: " + guestName + " | Room Type: " + roomType);
     }
 }
-```
-```java
+
 public class RoomSearchService {
 
     /**
@@ -70,4 +69,4 @@ public class RoomSearchService {
         System.out.println("\n============================");
     }
 }
-```
+
