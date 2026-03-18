@@ -1,4 +1,4 @@
-```java
+
 public class RoomSearchService {
 
     /**
@@ -40,4 +40,4 @@ public class RoomSearchService {
         System.out.println("\n============================");
     }
 }
-```
+
